@@ -21,7 +21,7 @@ var openFB = (function () {
 
         baseURL = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + context,
 
-        oauthRedirectURL = 'https://www.facebook.com/connect/login_success.html',
+        oauthRedirectURL = window.location+'oauthcallback.html',
 
         logoutRedirectURL ='https://dl.dropboxusercontent.com/u/32423176/Nmad_Dev/www/logoutcallback.html',
 
@@ -34,7 +34,7 @@ var openFB = (function () {
 
         // Used in the exit event handler to identify if the login has already been processed elsewhere (in the oauthCallback function)
         loginProcessed;
-
+	alert(oauthRedirectURL);
     console.log(oauthRedirectURL);
     console.log(logoutRedirectURL); 
 
