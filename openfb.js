@@ -21,8 +21,12 @@ var openFB = (function () {
 
         baseURL = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + context,
 
-        oauthRedirectURL = window.location+'oauthcallback.html',
-
+      //oauthRedirectURL = 'https://dl.dropboxusercontent.com/u/32423176/Nmad_Dev/www/oauthcallback.html',
+	   //str = window.location,
+	  //NEED TODO: if there is no index.html in href...
+	  // .search() will return >-1 if index.html is found
+	  oauthRedirectURL_temp = window.location.href,
+	  oauthRedirectURL = oauthRedirectURL_temp.replace(window.location.pathname,window.location.pathname.replace('index.html','oauthcallback.html')),
         logoutRedirectURL ='https://dl.dropboxusercontent.com/u/32423176/Nmad_Dev/www/logoutcallback.html',
 
         // Because the OAuth login spans multiple processes, we need to keep the login callback function as a variable
@@ -34,7 +38,10 @@ var openFB = (function () {
 
         // Used in the exit event handler to identify if the login has already been processed elsewhere (in the oauthCallback function)
         loginProcessed;
-	alert(oauthRedirectURL);
+		
+		if(oauthRedirectURL.search("index.html")<0)
+			oauthRedirectURL+"index.html";
+	alert("1-"+oauthRedirectURL);
     console.log(oauthRedirectURL);
     console.log(logoutRedirectURL); 
 
@@ -71,21 +78,19 @@ var openFB = (function () {
         if (token) {
             loginStatus.status = 'connected';
             loginStatus.authResponse = {token: token};
-			alert(token);
+	
         } else {
             loginStatus.status = 'unknown';
         }
         if (callback) callback(loginStatus);
     }
   function getLoginStatusToken() {
-		alert(2);
+	
         var token = tokenStore['fbtoken'],
             loginStatus = {};
         if (token) {
-		alert('connected');
             return 'connected';
         } else {
-		alert('unknown');
             return 'unknown';
 					
         }
@@ -105,7 +110,7 @@ var openFB = (function () {
             startTime,
             scope = '';
 
-        if (!fbAppId) {
+        if (!fbAppId) { 
             return callback({status: 'unknown', error: 'Facebook App Id not set.'});
         }
 
@@ -143,10 +148,10 @@ var openFB = (function () {
 
 //        logout();
 
+alert(oauthRedirectURL);
         if (runningInCordova) {
             oauthRedirectURL = "https://www.facebook.com/connect/login_success.html";
         }
-
         startTime = new Date().getTime();
         loginWindow = window.open(FB_LOGIN_URL + '?client_id=' + fbAppId + '&redirect_uri=' + oauthRedirectURL +
             '&response_type=token&scope=' + scope, '_blank', 'location=no');
@@ -171,7 +176,7 @@ var openFB = (function () {
         // Parse the OAuth data received from Facebook
         var queryString,
             obj;
-
+		
         loginProcessed = true;
         if (url.indexOf("access_token=") > 0) {
             queryString = url.substr(url.indexOf('#') + 1);
