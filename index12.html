@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <!--
     Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
@@ -39,7 +41,7 @@
 
 <script type="text/javascript">
 
-var SVCPath="http://localhost:64785/Nomad.svc/";
+Var SVCPath="http://localhost:64785/Nomad.svc/";
 
 var cb = new Codebird;
 cb.setConsumerKey("wqw4pxCs4oSDuphXBUly8v7AX", "o8Y7uVSaHiz7qlRtoWQBdhznoWeeOWCZSrtogfy9xM0oE8LTZv");
@@ -94,8 +96,6 @@ document.getElementById("HiddenPinDiv").style.visibility="hidden";
 </script>
 
 		<script>
-		
-//var SVCPath="http://localhost:64785/Nomad.svc/";
 		//get exact coords
 		
 		//get device model
@@ -108,10 +108,9 @@ document.getElementById("HiddenPinDiv").style.visibility="hidden";
 			//1552445581686089 - prod
 			//nmad demo 811842908898811
 			  openFB.init({appId: '1565772343686746', tokenStore: window.localStorage});
-			function login() { 
+			function login() {
 				openFB.login(
 						function(response) {
-						alert(response.status);
 							if(response.status === 'connected') {
 								alert('Facebook login succeeded, got access token: ' + response.authResponse.token);
 								
@@ -119,7 +118,7 @@ document.getElementById("HiddenPinDiv").style.visibility="hidden";
 								 var xmlHttp = null;
 								//http://localhost:64785/Nomad.svc/adduser/1233/0/1232
 								xmlHttp = new XMLHttpRequest();
-								xmlHttp.open( "GET", SVCPath + "adduser/" + $( ".email" ).val()+"/" + "1/"+$( ".password1" ).val(), false );
+								xmlHttp.open( "GET", SVC + "adduser/" + $( ".email" ).val()+"/" + "1/"+$( ".password1" ).val(), false );
 								xmlHttp.send( null );
 								window.location = "index.html#Profile";
 							} else {
@@ -185,29 +184,23 @@ document.getElementById("HiddenPinDiv").style.visibility="hidden";
 			function btnCreateAccount_click(){ 
 			//alert("email/0/password1" + $( ".email" ).val()+ 0 + $( ".password1" ).val()); 
 			  var xmlHttp = null;
-			//http://localhost:64785/Nomad.svc/adduser/1233/0/1232/mobile
+			//http://localhost:64785/Nomad.svc/adduser/1233/0/1232
 			xmlHttp = new XMLHttpRequest();
-			xmlHttp.open( "GET", SVCPath + "adduser/" + $( ".email" ).val()+"/" + "0/"+$( ".password1" ).val()+"/"+"mobile", false );
+			xmlHttp.open( "GET", SVC + "adduser/" + $( ".email" ).val()+"/" + "0/"+$( ".password1" ).val(), false );
 			xmlHttp.send( null );
 			//alert("response 1"+xmlHttp.responseText);
 			//if response good
 			//set userid globally/store
-				alert();
-			alert("response 1"+xmlHttp.responseText);
 			window.location.href = '#Profile';
 			}
 		   function btnAuthAccount_click(){ 
-		   alert();
-		   
-			alert(SVCPath + "authuser/" + $( ".Semail" ).val() +"/" + $( ".Spassword1" ).val()); 
+			//alert("email/0/password1" + $( ".email" ).val()+ 0 + $( ".password1" ).val()); 
 			  var xmlHttp = null;
 			//http://localhost:64785/Nomad.svc/adduser/1233/0/1232
 			xmlHttp = new XMLHttpRequest();
-			//xmlHttp.open( "GET", SVCPath + "authuser/" + $( ".email" ).val()+"/" + $( ".password1" ).val(), false );
-			xmlHttp.open( "GET", SVCPath + "authuser/" + $( ".Semail" ).val() +"/" + $( ".Spassword1" ).val(), false );
+			xmlHttp.open( "GET", SVC + "authuser/" + $( ".email" ).val()+"/" + "0/"+$( ".password1" ).val(), false );
 			xmlHttp.send( null );
-			alert();
-			alert("response 1"+xmlHttp.responseText);
+			//alert("response 1"+xmlHttp.responseText);
 			//if response good
 			//set userid globally/store
 			window.location.href = '#Profile';
@@ -218,9 +211,8 @@ document.getElementById("HiddenPinDiv").style.visibility="hidden";
 			var xmlHttp = null;
 			//http://localhost:64785/Nomad.svc/updateprofile/{userid}/{age}/{Education}/{WorkHistory}/{curlocation}/{Gender}/{Industry}/{isactive}/{userName}/{Occupation}/{HomeTown}/{About}/{status}
 			xmlHttp = new XMLHttpRequest();
-			xmlHttp.open( "GET", SVCPath + "updateprofile/1/" + $( ".Age" ).val()+"/" +$( ".Education" ).val() +"/" +$( ".WorkHistory" ).val()+"/" +$( ".curlocation" ).val()+"/" +$( ".Gender" ).val()+"/" +$( ".Industry" ).val()+"/" +1+"/" +$( ".userName" ).val()+$( ".Occupation" ).val()+$( ".HomeTown" ).val()+$( ".About" ).val()+$( ".status" ).val(), false);
+			xmlHttp.open( "GET", SVC + "updateprofile/1/" + $( ".Age" ).val()+"/" +$( ".Education" ).val() +"/" +$( ".WorkHistory" ).val()+"/" +$( ".curlocation" ).val()+"/" +$( ".Gender" ).val()+"/" +$( ".Industry" ).val()+"/" +1+"/" +$( ".userName" ).val()+$( ".Occupation" ).val()+$( ".HomeTown" ).val()+$( ".About" ).val()+$( ".status" ).val(), false);
 			xmlHttp.send( null );
-			
 			//alert("response 1"+xmlHttp.responseText);
 			//if response good 
 			window.location.href = '#Profile';
@@ -292,8 +284,8 @@ document.getElementById("HiddenPinDiv").style.visibility="hidden";
 			<div data-role="content">	 
 				<div data-role="fieldcontain" class="ui-hide-label">
 					<label for="track_id">Name:</label>
-					<input type="text" name="Semail" class ="Semail" id="Semail" placeholder="Email"/>						
-					<input type="text" name="Spassword1" class="Spassword1" id="Spassword1" placeholder="Password"/>
+					<input type="text" name="id" id="Email" placeholder="Email"/>						
+					<input type="text" name="password1" id="Password" placeholder="Password"/> 
 					<div id="fb-root"></div> 
 					<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
 				</div>
