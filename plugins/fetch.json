@@ -1,8 +1,8 @@
 {
-    "org.apache.cordova.inappbrowser": {
+    "cordova-plugin-inappbrowser": {
         "source": {
             "type": "registry",
-            "id": "org.apache.cordova.inappbrowser"
+            "id": "cordova-plugin-inappbrowser"
         },
         "is_top_level": true,
         "variables": {}
