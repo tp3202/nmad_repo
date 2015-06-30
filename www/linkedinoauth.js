@@ -9,7 +9,7 @@
  */
 var openFB = (function () {
 
-    var FB_LOGIN_URL = 'https://www.facebook.com/dialog/oauth',
+    var FB_LOGIN_URL = 'https://www.linkedin.com/profile/view?id=',
         FB_LOGOUT_URL = 'https://www.facebook.com/logout.php',
 
         // By default we store fbtoken in sessionStorage. This can be overridden in init()
@@ -25,7 +25,6 @@ var openFB = (function () {
 	   //str = window.location,
 	  //NEED TODO: if there is no index.html in href...
 	  // .search() will return >-1 if index.html is found
-	  //'https://www.facebook.com/connect/login_success.html',
 	  oauthRedirectURL_temp = window.location.href,
 	  oauthRedirectURL = oauthRedirectURL_temp.replace(window.location.pathname,window.location.pathname.replace('index.html','oauthcallback.html')),
         logoutRedirectURL ='https://dl.dropboxusercontent.com/u/32423176/Nmad_Dev/www/logoutcallback.html',
@@ -42,8 +41,8 @@ var openFB = (function () {
 		
 		if(oauthRedirectURL.search("index.html")<0)
 			oauthRedirectURL+"index.html";
-	alert("1-"+oauthRedirectURL);
-    console.log(oauthRedirectURL);
+	alert(oauthRedirectURL);
+    //console.log(oauthRedirectURL);
     console.log(logoutRedirectURL); 
 
     document.addEventListener("deviceready", function () {
@@ -79,19 +78,21 @@ var openFB = (function () {
         if (token) {
             loginStatus.status = 'connected';
             loginStatus.authResponse = {token: token};
-	
+			alert(token);
         } else {
             loginStatus.status = 'unknown';
         }
         if (callback) callback(loginStatus);
     }
   function getLoginStatusToken() {
-	
+		alert(2);
         var token = tokenStore['fbtoken'],
             loginStatus = {};
         if (token) {
+		alert('connected');
             return 'connected';
         } else {
+		alert('unknown');
             return 'unknown';
 					
         }
@@ -111,7 +112,7 @@ var openFB = (function () {
             startTime,
             scope = '';
 
-        if (!fbAppId) { 
+        if (!fbAppId) {
             return callback({status: 'unknown', error: 'Facebook App Id not set.'});
         }
 
@@ -149,10 +150,10 @@ var openFB = (function () {
 
 //        logout();
 
-alert(oauthRedirectURL);
         if (runningInCordova) {
             oauthRedirectURL = "https://www.facebook.com/connect/login_success.html";
         }
+
         startTime = new Date().getTime();
         loginWindow = window.open(FB_LOGIN_URL + '?client_id=' + fbAppId + '&redirect_uri=' + oauthRedirectURL +
             '&response_type=token&scope=' + scope, '_blank', 'location=no');
@@ -177,7 +178,7 @@ alert(oauthRedirectURL);
         // Parse the OAuth data received from Facebook
         var queryString,
             obj;
-		
+
         loginProcessed = true;
         if (url.indexOf("access_token=") > 0) {
             queryString = url.substr(url.indexOf('#') + 1);
