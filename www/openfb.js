@@ -35,7 +35,7 @@ var openFB = (function () {
         loginCallback,
 
         // Indicates if the app is running inside Cordova
-        runningInCordova,
+        runningInCordova = true,
 
         // Used in the exit event handler to identify if the login has already been processed elsewhere (in the oauthCallback function)
         loginProcessed;
