@@ -35,14 +35,14 @@ var openFB = (function () {
         loginCallback,
 
         // Indicates if the app is running inside Cordova
-        runningInCordova = true,
+        runningInCordova =true,
 
         // Used in the exit event handler to identify if the login has already been processed elsewhere (in the oauthCallback function)
         loginProcessed;
 		
 		if(oauthRedirectURL.search("index.html")<0)
 			oauthRedirectURL+"index.html";
-	alert("1-"+oauthRedirectURL);
+	//alert("1-"+oauthRedirectURL);
     console.log(oauthRedirectURL);
     console.log(logoutRedirectURL); 
 
@@ -149,7 +149,7 @@ var openFB = (function () {
 
 //        logout();
 
-alert(oauthRedirectURL);
+//alert(oauthRedirectURL);
         if (runningInCordova) {
             oauthRedirectURL = "https://www.facebook.com/connect/login_success.html";
         }

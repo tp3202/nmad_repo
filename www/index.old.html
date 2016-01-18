@@ -51,7 +51,6 @@
 		<link rel="stylesheet" href="jquery.mobile-1.1.0.min.css" />
 		-->
 <script type="text/javascript">
-//64785
 
 var SVCPath="http://localhost:64785/Nomad.svc/";
 
@@ -122,23 +121,23 @@ document.getElementById("HiddenPinDiv").style.visibility="hidden";
 			//1552445581686089 - prod
 			//nmad demo 811842908898811
 			  openFB.init({appId: '1565772343686746', tokenStore: window.localStorage});
-			function login() {  
+			function login() { 
 				openFB.login(
 						function(response) {
-						alert(response.status);
+						//alert(response.status);
 							if(response.status === 'connected') {
 								//alert('Facebook login succeeded, got access token: ' + response.authResponse.token);
 								//alert('If websvc isn/''t running redirect fails')
-								console.log(getInfo());
+								getInfo();
 								
-								//window.location = "index.html#FastPage";
+								window.location = "index.html#FastPage";
 								//window.location = "index.html#LandingPage";
-								var xmlHttp = null;
+								/* var xmlHttp = null;
 								//http://localhost:64785/Nomad.svc/adduser/1233/0/1232
 								xmlHttp = new XMLHttpRequest();
 								xmlHttp.open( "GET", SVCPath + "adduser/" + $( ".email" ).val()+"/" + "1/"+$( ".password1" ).val(), false );
 								xmlHttp.send( null );
-								window.location = "index.html#LandingPage";
+								window.location = "index.html#LandingPage";*/
 							} else {
 								alert('Facebook login failed: ' + response.error);
 							}
@@ -196,7 +195,7 @@ document.getElementById("HiddenPinDiv").style.visibility="hidden";
 						errorHandler);
 			}
 			function errorHandler(error) {
-				alert(error);
+				alert(error.message);
 			}
 			
 			function btnCreateAccount_click(){ 
@@ -300,12 +299,13 @@ document.getElementById("HiddenPinDiv").style.visibility="hidden";
 						<input type="text" name="email" class ="email" id="email" placeholder="Email"/>						
 						<input type="password" name="password1" class="password1" id="password1" placeholder="Password"/>
 						<input type="password" name="password2" id="password2" placeholder="Confirm Password"/> 
-						<button class="btn btn-block" onclick="login()">Login with Facebook</button>
+						<button class="btn btn-block" onclick="login">Login with Facebook</button>
 						<!--<button class="btn btn-block" onclick="revoke()">Revoke Permissions</button> -->
 					</div>
 					<div style="width:50%; margin-left:25%;">
 					<button data-role="button" style="" id="btnCreateAccount" onclick="btnCreateAccount_click()">Join Nomad!</button>
-					<a href="#FastPage" data-transition="none" data-icon="plus">Skip server, next frame</a>
+					<!--<button data-role="button" style="width:50% !important;" id="btn_devicetest" onclick="getdevice()">test device</button>-->
+					
 					</div>
 			</div>
 		</div> 
@@ -354,22 +354,21 @@ document.getElementById("HiddenPinDiv").style.visibility="hidden";
 	</div>
 				  
 				<!-- <a href="index.html" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a> -->
-		 <a href="#Profile" data-transition="none" data-icon="plus">Skip server, next frame</a>
-					
+		 
 		<!--Main Content-->	
 			<div data-role="content">	 
 				<!-- -->
 				<!--//http://localhost:64785/Nomad.svc/updateprofile/{userid}/{age}/{Education}/{WorkHistory}/{curlocation}/{Gender}/{Industry}/{isactive}/{userName}/{Occupation}/{HomeTown}/{About}/{status}", ResponseFormat = WebMessageFormat.Xml)]
 			-->
-				<p>Terrence Purswani</p>
+				<p>Username</p>
 				<!--<button class="btn btn-block" onclick="getInfo()">Load From Facebook</button>  -->
 					<div data-role="fieldcontain" style="margin: 0 auto; text-align:center" class="ui-hide-label">  
 						<table style="margin: 0 auto;">
 						<tr><td><img id="userPic"/></br></td></tr>
 						<tr><td style="padding:10px"><a href="#GrowNetwork">Find Nomads</a></td></tr>
 						<tr><td style="padding:10px"><a>My Tribe</a></td></tr>
-						<tr><td style="padding:10px"><a href="#Profile">My Profile</a></td></tr>						
-						<tr><td style="padding:10px"><a href="#SocialMedia">My Social Media</a></td></tr>
+						<tr><td style="padding:10px"><a>My Profile</a></td></tr>						
+						<tr><td style="padding:10px"><a>My Social Media</a></td></tr>
 						</table>
 					</div>
 						</div>
@@ -383,7 +382,8 @@ document.getElementById("HiddenPinDiv").style.visibility="hidden";
 		<!--NAV-->	
 			<div data-role="header">
 				<h1>Profile</h1>				
-			<a data-icon="bars" class="ui-icon-bars" data-iconpos="notext" style="border-color:transparent; border:none;background-color:transparent;font-size:1.4em;"></a>
+			
+				<a href="#slidepopupMenu" data-transition="slide" class="showMenu" data-rel="popup">Menu</a>
 				<div data-role="navbar">
 					<ul>
 						 <li><a href="#slidepopupMenu" data-transition="slide" class="showMenu" data-rel="popup">Menu</a></li>
@@ -402,27 +402,19 @@ document.getElementById("HiddenPinDiv").style.visibility="hidden";
 						<label for="track_id">Name:</label>
 						<img id="userPic"/></br>
 						<input type="text" name="userName" id="userName" placeholder="Name"/>						
-						<input type="number" class ="Age" name="age" id="Age" placeholder="Age"/> 
-						
-						
+						<input type="text" class ="Age" name="age" id="Age" placeholder="Age"/> 
+						<input type="text" class="Gender" name="Gender" id="Gender" placeholder="Gender"/> 
 						<input type="text" class="Occupation" name="Occupation" id="Occupation" placeholder="Occupation"/>
 						<input type="text" class="Industry" name="Industry" id="Industry" placeholder="Industry"/> 						
 						<input type="text" class="WorkHistory" name="WorkHistory" id="WorkHistory" placeholder="Company"/> 
 						<input type="text" class="HomeTown" name="HomeTown" id="HomeTown" placeholder="Where are you from"/>	
-						<input type="text" class="Education" name="Education" id="Education" placeholder="Alma Mater" /> 
 						<input type="text" class="About" name="About" id="About" placeholder="about you (e.g. 'I Love Hiking')"/>	
+						<input type="text" class="Education" name="Education" id="Education" placeholder="Alma Mater" /> 
 						
-						<fieldset data-role="controlgroup">
-    <legend>Choose your gender:</legend>
-      <label for="male">Male</label>
-      <input type="radio" name="gender" id="male" value="male">
-      <label for="female">Female</label>
-      <input type="radio" name="gender" id="female" value="female"> 
-  </fieldset>
 					</div>
 				<!--Submit Form-->	
 					<div style="width:50%; margin-left:25%;">
-					<button data-role="button"  onclick="btnUpdateProfile_click()" id="btnUpdateProfile">Update Profile!</button>
+					<button data-role="button" style="width:50% !important;" onclick="btnUpdateProfile_click()" id="btnUpdateProfile">Update Profile!</button>
 					</div>
 			</div>
 		</div><!-- /page -->		
